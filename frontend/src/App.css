@@ -1,0 +1,48 @@
+/* App specific styles */
+.App {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Ensure smooth scrolling behavior */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Remove default margins for sections */
+section {
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom cursor for interactive elements */
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Disable text selection on decorative elements */
+.parallax-bg,
+.parallax-mid {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Image loading optimization */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+}
+
+/* Custom focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
