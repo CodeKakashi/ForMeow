@@ -52,6 +52,14 @@ export const TopNav = () => {
           >
             Meow Quiz
           </NavLink>
+          <NavLink
+            to="/coupon-vault"
+            className={({ isActive }) =>
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
+            }
+          >
+            Coupon Vault
+          </NavLink>
         </div>
       </div>
     </nav>

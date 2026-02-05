@@ -11,7 +11,6 @@ import {
   Sparkles,
   Volume2,
 } from 'lucide-react';
-import { Footer } from '../components/Footer';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 
@@ -749,8 +748,6 @@ export const MoodPickerPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <Footer />
     </div>
   );
 };

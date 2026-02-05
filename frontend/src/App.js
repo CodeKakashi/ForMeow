@@ -7,7 +7,9 @@ import { AboutHerPage } from './pages/AboutHerPage';
 import { MoodPickerPage } from './pages/MoodPickerPage';
 import { CatQuizPage } from './pages/CatQuizPage';
 import { ChaosLandingPage } from './pages/ChaosLandingPage';
+import { CouponVaultPage } from './pages/CouponVaultPage';
 import { WalkingCat } from './components/WalkingCat';
+import { Footer } from './components/Footer';
 import { Toaster } from '@/components/ui/sonner';
 
 const AppShell = () => {
@@ -25,7 +27,10 @@ const AppShell = () => {
         <Route path="/about-her" element={<AboutHerPage />} />
         <Route path="/mood-picker" element={<MoodPickerPage />} />
         <Route path="/cat-quiz" element={<CatQuizPage />} />
+        <Route path="/coupon-vault" element={<CouponVaultPage />} />
       </Routes>
+
+      <Footer />
 
       {/* Fixed Elements */}
       {!isChaosLanding && <WalkingCat />}

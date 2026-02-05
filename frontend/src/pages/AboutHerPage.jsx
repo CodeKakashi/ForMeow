@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Footer } from '../components/Footer';
 
 const sparkleTraits = [
   {
@@ -279,8 +278,6 @@ export const AboutHerPage = () => {
           </motion.div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

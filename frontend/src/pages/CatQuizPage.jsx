@@ -11,7 +11,6 @@ import {
   Volume2,
   VolumeX,
 } from 'lucide-react';
-import { Footer } from '../components/Footer';
 
 const CATEGORY_OPTIONS = [
   { id: 'Angry', emoji: '😾', blurb: 'Stormy whisker mode' },
@@ -1109,8 +1108,6 @@ export const CatQuizPage = () => {
           </AnimatePresence>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };
