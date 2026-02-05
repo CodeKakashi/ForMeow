@@ -10,7 +10,7 @@ export const TopNav = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-secondary/70 via-accent/70 to-primary/70 backdrop-blur-lg border-b border-white/40" />
       <div className="relative max-w-6xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between gap-2 sm:gap-4">
         <NavLink
-          to="/"
+          to="/home"
           className="flex items-center gap-2 font-heading text-2xl text-foreground"
           aria-label="Go to home"
         >
@@ -21,7 +21,7 @@ export const TopNav = () => {
         <div className="flex min-w-0 flex-1 items-center justify-end gap-1 sm:gap-2 overflow-x-auto">
           <NavLink
             end
-            to="/"
+            to="/home"
             className={({ isActive }) =>
               `${linkBase} ${isActive ? linkActive : linkInactive}`
             }
@@ -43,6 +43,14 @@ export const TopNav = () => {
             }
           >
             Mood Picker
+          </NavLink>
+          <NavLink
+            to="/cat-quiz"
+            className={({ isActive }) =>
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
+            }
+          >
+            Meow Quiz
           </NavLink>
         </div>
       </div>
