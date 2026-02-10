@@ -4,6 +4,24 @@
   position: relative;
 }
 
+/* Cute cat cursor */
+:root {
+  --cat-cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 64 64'><path d='M12 22 L20 10 L28 22 Z' fill='%23f7c9d9'/><path d='M52 22 L44 10 L36 22 Z' fill='%23f7c9d9'/><circle cx='32' cy='34' r='18' fill='%23fbe4ee' stroke='%23d69ab0' stroke-width='3'/><circle cx='24' cy='32' r='3' fill='%233a2a2a'/><circle cx='40' cy='32' r='3' fill='%233a2a2a'/><circle cx='32' cy='38' r='2' fill='%23d69ab0'/><path d='M28 40 Q32 44 36 40' stroke='%23d69ab0' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M18 38 H6' stroke='%23d69ab0' stroke-width='2' stroke-linecap='round'/><path d='M46 38 H58' stroke='%23d69ab0' stroke-width='2' stroke-linecap='round'/><path d='M18 34 H8' stroke='%23d69ab0' stroke-width='2' stroke-linecap='round'/><path d='M46 34 H56' stroke='%23d69ab0' stroke-width='2' stroke-linecap='round'/></svg>") 16 16;
+  --cat-cursor-pointer: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 64 64'><path d='M12 22 L20 10 L28 22 Z' fill='%23f7c9d9'/><path d='M52 22 L44 10 L36 22 Z' fill='%23f7c9d9'/><circle cx='32' cy='34' r='18' fill='%23fbe4ee' stroke='%23d69ab0' stroke-width='3'/><circle cx='24' cy='32' r='3' fill='%233a2a2a'/><circle cx='40' cy='32' r='3' fill='%233a2a2a'/><circle cx='32' cy='38' r='2' fill='%23d69ab0'/><path d='M28 40 Q32 44 36 40' stroke='%23d69ab0' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M18 38 H6' stroke='%23d69ab0' stroke-width='2' stroke-linecap='round'/><path d='M46 38 H58' stroke='%23d69ab0' stroke-width='2' stroke-linecap='round'/><path d='M18 34 H8' stroke='%23d69ab0' stroke-width='2' stroke-linecap='round'/><path d='M46 34 H56' stroke='%23d69ab0' stroke-width='2' stroke-linecap='round'/></svg>") 16 16;
+}
+
+html,
+body {
+  cursor: var(--cat-cursor), auto;
+}
+
+/* Preserve text cursor for inputs */
+input,
+textarea,
+select {
+  cursor: text;
+}
+
 /* Ensure smooth scrolling behavior */
 * {
   scroll-behavior: smooth;
@@ -18,8 +36,9 @@ section {
 /* Custom cursor for interactive elements */
 button,
 a,
-[role="button"] {
-  cursor: pointer;
+[role="button"],
+.cursor-pointer {
+  cursor: var(--cat-cursor-pointer), pointer;
 }
 
 /* Disable text selection on decorative elements */
