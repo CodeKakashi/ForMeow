@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import purrFect from '../assets/Purr-fect.jpeg';
+import meowMent from '../assets/meow-ment.jpg';
+import Forever from '../assets/Forever.jpeg';
+import meMeow from '../assets/Me-Meow.jpeg';
 
 export const GallerySection = () => {
   const ref = useRef(null);
@@ -9,26 +13,26 @@ export const GallerySection = () => {
   const photos = [
     {
       id: 1,
-      url: 'https://placekitten.com/400/500',
+      url: meowMent,
       caption: 'Our first meow-ment',
       rotation: -3,
     },
     {
       id: 2,
-      url: 'https://placekitten.com/500/400',
+      url: purrFect,
       caption: 'Purr-fect together',
       rotation: 2,
     },
     {
       id: 3,
-      url: 'https://placekitten.com/450/450',
+      url: Forever,
       caption: 'Forever and always',
       rotation: -2,
     },
     {
       id: 4,
-      url: 'https://placekitten.com/400/450',
-      caption: 'You and meow',
+      url: meMeow,
+      caption: 'ME and meow',
       rotation: 3,
     },
   ];
@@ -37,7 +41,7 @@ export const GallerySection = () => {
     <section className="relative min-h-screen py-20 px-4 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/20 to-background" />
-      
+
       {/* Floating yarn balls */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
         {[...Array(8)].map((_, i) => (
@@ -86,19 +90,19 @@ export const GallerySection = () => {
             <motion.div
               key={photo.id}
               initial={{ opacity: 0, y: 50, rotate: 0 }}
-              animate={isInView ? { 
-                opacity: 1, 
-                y: 0, 
-                rotate: photo.rotation 
+              animate={isInView ? {
+                opacity: 1,
+                y: 0,
+                rotate: photo.rotation
               } : {}}
-              transition={{ 
-                duration: 0.6, 
+              transition={{
+                duration: 0.6,
                 delay: 0.2 + index * 0.1,
                 type: "spring",
                 stiffness: 100,
               }}
-              whileHover={{ 
-                scale: 1.05, 
+              whileHover={{
+                scale: 1.05,
                 rotate: 0,
                 zIndex: 10,
                 transition: { duration: 0.3 }
@@ -107,13 +111,13 @@ export const GallerySection = () => {
               style={{ rotate: `${photo.rotation}deg` }}
             >
               <div className="relative overflow-hidden rounded-lg">
-                <img 
-                  src={photo.url} 
+                <img
+                  src={photo.url}
                   alt={photo.caption}
                   className="w-full h-64 object-cover"
                 />
                 {/* Heart overlay on hover */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-secondary/0 flex items-center justify-center"
                   whileHover={{ backgroundColor: 'hsl(340 100% 93% / 0.3)' }}
                 >
@@ -126,7 +130,7 @@ export const GallerySection = () => {
                   </motion.span>
                 </motion.div>
               </div>
-              
+
               <p className="text-center mt-4 font-heading text-lg text-foreground">
                 {photo.caption}
               </p>
@@ -142,7 +146,7 @@ export const GallerySection = () => {
         >
           😺
         </motion.div>
-        
+
         <motion.div
           className="absolute -right-4 top-1/3 text-6xl hidden lg:block"
           animate={{ x: [10, 0, 10], rotate: [0, -5, 0] }}

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import forMyLove from '../assets/forMyLove.jpeg';
 
 export const HeroSection = () => {
   const scrollToNext = () => {
@@ -106,7 +107,7 @@ export const HeroSection = () => {
               }}
             >
               <img 
-                src="https://source.unsplash.com/400x400/?cute-cat,kitten" 
+                src={forMyLove}
                 alt="Cute cat"
                 className="w-64 h-64 rounded-full object-cover shadow-2xl border-8 border-white"
               />

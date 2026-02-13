@@ -138,3 +138,40 @@ export const ConfettiButton = () => {
     </motion.div>
   );
 };
+
+
+// 'Happy' - "Night changes", 
+// - https://www.youtube.com/watch?v=rg_zwK_sSEY
+// - [clean bandit](https://youtu.be/m-M1AtrxztU?si=kPcHlB-91Ra0yVh3)
+// - Megham karukatha
+// - yaar indha salai oram
+// - IK Vaari Aa
+// - [Sooraj](https://youtu.be/nJZcbidTutE?si=3o_38EJH-TZGLvQG) 
+// - Tum Se HI 
+// - Dildara 
+// - Hayyoda 
+// - Katchi sera 
+// - Vizhi veekura 
+// - Marakkavillayae 
+// - Manjal veyil
+// - Mental Manadhil
+// - Anbil Avan
+// - Hosanna 
+// - chantaje 
+// - arjit, sheriya 
+// - Nenjukul pethidum thamarai 
+
+// 'Missing Me'
+// 'Angry'
+// 'Frustrated'
+// 'Bored'
+// 'Hopeless'
+// 'Depressed'
+// 'Guilty'
+// 'Ashamed'
+// 'Fearful'
+// 'Romantic'
+// 'Aroused'
+// 'Randy'
+// 'Horny'
+// 'Irritable'

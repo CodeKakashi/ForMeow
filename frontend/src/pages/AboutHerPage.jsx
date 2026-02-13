@@ -95,7 +95,7 @@ export const AboutHerPage = () => {
                 page is a little constellation of the things that make her so special.
               </p>
               <div className="flex flex-wrap gap-3">
-                {['Kind', 'Brilliant', 'Playful', 'Caring'].map((chip) => (
+                {['Kind', 'Brilliant', 'Playful', 'Caring', 'Mischievous', 'Adorable', 'Gentle', 'Horny', 'Sexy'].map((chip) => (
                   <span
                     key={chip}
                     className="rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-foreground shadow-sm"

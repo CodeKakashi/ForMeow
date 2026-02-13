@@ -15,7 +15,7 @@ export const TopNav = () => {
           aria-label="Go to home"
         >
           <span className="text-2xl">🐾</span>
-          <span className="hidden sm:inline">For My Love</span>
+          <span className="hidden sm:inline">To My Love</span>
         </NavLink>
 
         <div className="flex min-w-0 flex-1 items-center justify-end gap-1 sm:gap-2 overflow-x-auto">
@@ -66,7 +66,7 @@ export const TopNav = () => {
               `${linkBase} ${isActive ? linkActive : linkInactive}`
             }
           >
-            Coupon Vault
+            Coupons
           </NavLink>
         </div>
       </div>
