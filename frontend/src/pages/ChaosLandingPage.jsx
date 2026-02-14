@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import protocolPdf from '../assets/Protocol.pdf';
 
 const stageTitles = {
-  proposal1: 'Will you be my Valentine?',
+  proposal1: 'Will you forever be my favorite place to land?',
   fakeout: "Welcome to the special website... let's start then.",
   proposal2: 'Will you marry me?',
 };
@@ -12,55 +13,145 @@ const PUNISHMENT_WHATSAPP_NUMBER = '+44 7887153839';
 const PROPOSAL1_PUNISHMENT_TIERS = [
   {
     level: 1,
-    emoji: '💋',
-    title: 'Forehead Kiss Tax',
-    punishment: 'Penalty unlocked: 3 surprise forehead kisses.',
+    emoji: '🖤',
+    title: 'The "Lingerie" Surprise',
+    punishment: 'Out/At Home: Wear something hidden under "normal" clothes during a mundane task. Pro-Tip: Show them a "glimpse" while in a public (but safe) place.',
   },
   {
     level: 2,
+    emoji: '🤫',
+    title: 'The Silent Seduction',
+    punishment: 'At Home: Communicate only through touch and breath for 30 minutes. Pro-Tip: No words allowed, even when things get... loud.',
+  },
+  {
+    level: 3,
+    emoji: '🚪',
+    title: 'The Threshold Welcome',
+    punishment: 'At Home: Meet your partner at the door with a drink and a kiss that lasts at least 2 minutes. Pro-Tip: Don’t even let them take their coat off first.',
+  },
+  {
+    level: 4,
+    emoji: '👑',
+    title: 'The Grand Finale',
+    punishment: 'At Home: Combine three of the previous levels into one "Mega-Date." Pro-Tip: Clear your schedule for the entire next morning.',
+  },
+  {
+    level: 5,
     emoji: '🎤',
     title: 'Meow Voice Note Duty',
     punishment: 'Send one dramatic "I miss you" voice note in cat language.',
   },
   {
-    level: 3,
+    level: 6,
     emoji: '🕺',
     title: 'Zoomie Dance Order',
     punishment: 'Mandatory 10-second goofy dance in the living room.',
   },
   {
-    level: 4,
+    level: 7,
     emoji: '🍫',
     title: 'Snack Bribe Protocol',
     punishment: 'Offer one chocolate or snack tribute to calm the cat.',
   },
   {
-    level: 5,
+    level: 8,
     emoji: '🧸',
     title: 'Cuddle Summon',
     punishment: 'Instant cuddle within 5 minutes. No appeals allowed.',
   },
   {
-    level: 6,
+    level: 9,
     emoji: '🤳',
     title: 'Selfie Penalty',
     punishment: 'Send one shamelessly cute selfie with a kissy face.',
   },
   {
-    level: 7,
+    level: 10,
     emoji: '🎵',
     title: 'Playlist Duty',
     punishment: 'Build a 3-song mini playlist titled "My Favorite Human".',
   },
   {
-    level: 8,
+    level: 11,
     emoji: '🐾',
     title: 'Paw Promise Oath',
     punishment: 'Say "I choose you, always" in your cutest cat voice.',
   },
+  {
+    level: 12,
+    emoji: '🛀',
+    title: 'The Submerged Sanctuary',
+    punishment: 'At Home: A shared, candlelit bath with zero electronics allowed. Pro-Tip: Use a waterproof speaker for low, bass-heavy lo-fi beats.',
+  },
+  {
+    level: 13,
+    emoji: '❄️',
+    title: 'Thermal Mapping',
+    punishment: 'At Home: Use ice cubes followed immediately by warm breath on sensitive areas. Pro-Tip: Focus on the neck, inner thighs, and lower back.',
+  },
+  {
+    level: 14,
+    emoji: '🔥',
+    title: 'The Absolute Power Hour',
+    punishment: 'At Home: One partner makes every single decision for 60 minutes. Pro-Tip: "Yes" is the only legal response.',
+  },
+  {
+    level: 15,
+    emoji: '🍓',
+    title: 'The Blind Banquet',
+    punishment: 'At Home: Blindfold your partner and feed them various textures (honey, fruit, chocolate). Pro-Tip: Use your fingers, not utensils.',
+  },
+  {
+    level: 16,
+    emoji: '👔',
+    title: 'The Silk Tie Restraint',
+    punishment: 'At Home: Use a soft silk tie to gently secure your partner’s hands. Pro-Tip: Only use it to heighten the "look but don’t touch" rule.',
+  },
+  {
+    level: 17,
+    emoji: '🧴',
+    title: 'Full Body Canvas',
+    punishment: 'At Home: Use body-safe paint or chocolate sauce to "draw" on each other. Pro-Tip: The "cleanup" in the shower is the best part.',
+  },
+  {
+    level: 18,
+    emoji: '👁️',
+    title: 'The 5-Minute Eye Lock',
+    punishment: 'At Home: Sit naked/semi-naked and stare into each other’s eyes without touching. Pro-Tip: The first one to break the gaze loses "control" for the night.',
+  },
+  {
+    level: 19,
+    emoji: '📜',
+    title: 'The Fantasy Script',
+    punishment: 'At Home: Write down one specific scenario you’ve never tried and swap papers. Pro-Tip: Read them aloud while maintaining physical contact.',
+  },
+  {
+    level: 20,
+    emoji: '🧴',
+    title: 'Aesthetic Oil Ritual',
+    punishment: 'At Home: Perform a slow, methodical massage using warmed oils. Pro-Tip: Take 20 minutes on just the legs to build unbearable anticipation.',
+  }
 ];
 
 const PROPOSAL2_PUNISHMENT_TIERS = [
+  {
+    level: 1,
+    emoji: '🍷',
+    title: 'Spicy "Truth or Drink"',
+    punishment: 'At Home: Ask the "forbidden" questions about fantasies or past "best-ofs." Pro-Tip: If they drink to skip, they owe a physical forfeit.',
+  },
+  {
+    level: 2,
+    emoji: '🕯️',
+    title: 'The Candlelight Hand-Off',
+    punishment: 'At Home: Lead them through a dark house by a single flame. Pro-Tip: End the tour by blowing out the candle in the bedroom.',
+  },
+  {
+    level: 3,
+    emoji: '👠',
+    title: 'The "Vibe Check" Night Out',
+    punishment: 'Out: Wear your most provocative attire to a high-end lounge. Pro-Tip: Spend the night whispering what you’ll do the moment you turn the door key.',
+  },
   {
     level: 1,
     emoji: '🌹',
@@ -109,6 +200,78 @@ const PROPOSAL2_PUNISHMENT_TIERS = [
     title: 'Wifey Privilege Premium',
     punishment: 'Officially call her "my wife meow" for the rest of the day.',
   },
+  {
+    level: 9,
+    emoji: '👁️',
+    title: 'The Unspoken Command',
+    punishment: 'At Home: Spend 10 minutes communicating only through eye contact and breath. Pro-Tip: The first person to break eye contact must perform a 5-minute massage on the other.',
+  },
+  {
+    level: 10,
+    emoji: '🏙️',
+    title: 'The Hidden Exhibition',
+    punishment: 'Out: Go to a crowded lounge. One partner wears something "daring" underneath their clothes and must secretly show a glimpse to the other. Pro-Tip: Do it while a waiter is nearby for maximum thrill.',
+  },
+  {
+    level: 11,
+    emoji: '🧣',
+    title: 'The Silk Blindfold Map',
+    punishment: 'At Home: Blindfold your partner and trace a "map" on their body using only your lips. Pro-Tip: They have to guess the "destination" (the specific spot) to earn a kiss.',
+  },
+  {
+    level: 12,
+    emoji: '🧴',
+    title: 'The Artist & The Canvas',
+    punishment: 'At Home: Use edible body paint or chocolate to write a "to-do list" on your partner’s skin. Pro-Tip: You have to "erase" each item using only your tongue.',
+  },
+  {
+    level: 13,
+    emoji: '🥂',
+    title: 'The "Last Chance" Bar',
+    punishment: 'Out: Meet at a bar as strangers. Buy each other a drink and flirt as if you’ve never met. Pro-Tip: The "winner" of the flirt-off gets to choose the music for the drive home.',
+  },
+  {
+    level: 14,
+    emoji: '🌡️',
+    title: 'Thermal Tease',
+    punishment: 'At Home: Alternate between an ice cube and a warm, damp cloth on sensitive areas like the neck and inner thighs. Pro-Tip: Keep the blindfold from Level 11 on for heightened sensation.',
+  },
+  {
+    level: 15,
+    emoji: '🛀',
+    title: 'The Submerged Sanctuary',
+    punishment: 'At Home: A shared bath with zero electronics allowed. Pro-Tip: Wash each other’s bodies with extreme, agonizing slowness.',
+  },
+  {
+    level: 16,
+    emoji: '🍷',
+    title: 'Spicy Truth or Forfeit',
+    punishment: 'At Home: Ask the deepest, most "shameful" fantasies. If they refuse to answer, they must remove one item of clothing. Pro-Tip: The last person with clothes on wins a "free pass" for a week.',
+  },
+  {
+    level: 17,
+    emoji: '🕯️',
+    title: 'Shadow Play',
+    punishment: 'At Home: Turn off all the lights and use one candle to cast shadows while you dance or move together. Pro-Tip: Focus on how your silhouettes look on the wall.',
+  },
+  {
+    level: 18,
+    emoji: '⏳',
+    title: 'The 15-Minute No-Touch Rule',
+    punishment: 'At Home: Lay face-to-face, as close as possible without skin touching. Pro-Tip: Whisper exactly what you want to do once the timer goes off.',
+  },
+  {
+    level: 19,
+    emoji: '👂',
+    title: 'The Audio Tease',
+    punishment: 'At Home: Record a 30-second whisper of your dirtiest secret and send it to them while they are in the other room. Pro-Tip: They aren\'t allowed to come find you until you "summon" them.',
+  },
+  {
+    level: 20,
+    emoji: '🔥',
+    title: 'The Absolute Submission',
+    punishment: 'At Home: Hand over your phone or a "remote" (if you have one) and let them dictate every move for the rest of the night. Pro-Tip: Total trust is the ultimate aphrodisiac.',
+  },
 ];
 
 const getPunishmentForLevel = (level, punishmentTiers) => {
@@ -121,7 +284,22 @@ const getPunishmentForLevel = (level, punishmentTiers) => {
 };
 
 const getNoButtonLabel = (level) => {
-  if (level >= 8) {
+  if (level >= 20) {
+    return 'You don\'t love me anymore 😭';
+  }
+  if (level >= 17) {
+    return 'I know this is not my Meowiski 😢';
+  }
+  if (level >= 14) {
+    return 'You don\'t want to go higher than 14, do you? 😒';
+  }
+  if (level >= 11) {
+    return 'You really want to hit 11+? 🥺';
+  }
+  if (level >= 9) {
+    return 'Hiss 9+? 😠';
+  }
+  if (level >= 7) {
     return 'Nope? Brave 😼';
   }
   if (level >= 5) {
@@ -152,8 +330,9 @@ const buildWhatsAppUrl = (digits, message) => {
 
 const getBackgroundStyle = (stage, angerLevel) => {
   const anger = Math.min(angerLevel, 8);
+  const isSecondStage = stage === 'proposal2' || stage === 'confirmSure' || stage === 'confirmTerms';
 
-  if (stage === 'proposal2') {
+  if (isSecondStage) {
     return {
       background: `radial-gradient(circle at top, hsl(355 90% ${30 - anger * 1.6}%), hsl(356 85% ${
         19 - anger * 1.2
@@ -179,14 +358,17 @@ export const ChaosLandingPage = () => {
   const [stage, setStage] = useState('proposal1');
   const [angerLevel, setAngerLevel] = useState(0);
   const [noButtonPosition, setNoButtonPosition] = useState({ x: 72, y: 70 });
+  const [hasOpenedTerms, setHasOpenedTerms] = useState(false);
+  const [hasAgreedTerms, setHasAgreedTerms] = useState(false);
 
   const interactiveStage = stage === 'proposal1' || stage === 'proposal2';
+  const isSecondProposalStage = stage === 'proposal2' || stage === 'confirmSure' || stage === 'confirmTerms';
   const isSecondProposal = stage === 'proposal2';
   const activePunishmentTiers = useMemo(
-    () => (stage === 'proposal2' ? PROPOSAL2_PUNISHMENT_TIERS : PROPOSAL1_PUNISHMENT_TIERS),
-    [stage],
+    () => (isSecondProposalStage ? PROPOSAL2_PUNISHMENT_TIERS : PROPOSAL1_PUNISHMENT_TIERS),
+    [isSecondProposalStage],
   );
-  const punishmentSetLabel = stage === 'proposal2' ? 'Proposal #2 Set' : 'Proposal #1 Set';
+  const punishmentSetLabel = isSecondProposalStage ? 'Proposal #2 Set' : 'Proposal #1 Set';
   const currentPunishment = useMemo(
     () => getPunishmentForLevel(angerLevel, activePunishmentTiers),
     [angerLevel, activePunishmentTiers],
@@ -223,12 +405,14 @@ export const ChaosLandingPage = () => {
       x: minX + Math.random() * (maxX - minX),
       y: minY + Math.random() * (maxY - minY),
     });
-    setAngerLevel((previous) => Math.min(previous + 1, 20));
+    setAngerLevel((previous) => previous + 1);
   }, []);
 
   useEffect(() => {
     setAngerLevel(0);
     setNoButtonPosition({ x: 72, y: 70 });
+    setHasOpenedTerms(false);
+    setHasAgreedTerms(false);
   }, [stage]);
 
   useEffect(() => {
@@ -245,21 +429,12 @@ export const ChaosLandingPage = () => {
     };
   }, [stage]);
 
-  useEffect(() => {
-    if (stage !== 'reveal') {
-      return;
+  const handleGoHome = () => {
+    if (redirectTimerRef.current) {
+      window.clearTimeout(redirectTimerRef.current);
     }
-
-    redirectTimerRef.current = window.setTimeout(() => {
-      navigate('/home');
-    }, 3300);
-
-    return () => {
-      if (redirectTimerRef.current) {
-        window.clearTimeout(redirectTimerRef.current);
-      }
-    };
-  }, [stage, navigate]);
+    navigate('/home');
+  };
 
   const handleMouseMove = (event) => {
     if (!interactiveStage || !noButtonRef.current || !containerRef.current) {
@@ -289,6 +464,19 @@ export const ChaosLandingPage = () => {
     }
 
     if (stage === 'proposal2') {
+      setStage('confirmSure');
+      return;
+    }
+
+    if (stage === 'confirmSure') {
+      setStage('confirmTerms');
+      return;
+    }
+
+    if (stage === 'confirmTerms') {
+      if (!hasOpenedTerms || !hasAgreedTerms) {
+        return;
+      }
       if (!hasSentFinalWhatsAppRef.current) {
         hasSentFinalWhatsAppRef.current = true;
         // sendPunishmentsToWhatsApp();
@@ -296,6 +484,8 @@ export const ChaosLandingPage = () => {
       setStage('reveal');
     }
   };
+
+  const canConfirmTerms = hasOpenedTerms && hasAgreedTerms;
 
   const sendPunishmentsToWhatsApp = useCallback(() => {
     const digits = normalizePhoneNumber(PUNISHMENT_WHATSAPP_NUMBER);
@@ -315,7 +505,7 @@ export const ChaosLandingPage = () => {
 
     const message = [
       '😾 Grumpy Cat Punishment Alert!',
-      `Stage: ${stage === 'proposal2' ? 'Will you marry me?' : 'Will you be my Valentine?'}`,
+      `Stage: ${isSecondProposalStage ? 'Will you marry me?' : 'Will you forever be my favorite place to land?'}`,
       `Punishment Set: ${punishmentSetLabel}`,
       `Current Grumpy Level: ${angerLevel}`,
       `Latest Punishment: ${currentPunishment ? currentPunishment.title : 'None yet'}`,
@@ -329,7 +519,7 @@ export const ChaosLandingPage = () => {
     if (!popup) {
       window.alert('Please allow pop-ups for this site to open WhatsApp in a new tab.');
     }
-  }, [angerLevel, currentPunishment, punishmentSetLabel, stage, unlockedPunishments]);
+  }, [angerLevel, currentPunishment, isSecondProposalStage, punishmentSetLabel, unlockedPunishments]);
 
   return (
     <div
@@ -371,13 +561,13 @@ export const ChaosLandingPage = () => {
                   isSecondProposal ? 'text-rose-200/80' : 'text-muted-foreground'
                 }`}
               >
-                A special website for a special person.
+                A sanctuary crafted just for you, because of all the paths I could have followed, I’m so grateful I found my home in your heart
               </p>
               <h1 className="mt-4 text-center font-heading text-5xl leading-tight sm:text-7xl">{stageTitles[stage]}</h1>
               <p className={`mt-3 text-center text-sm sm:text-base ${isSecondProposal ? 'text-rose-100/85' : 'text-foreground/75'}`}>
                 {isSecondProposal
-                  ? 'The suspense is intentional. Choose wisely, Cat-Queen.'
-                  : 'One tiny click for you, one giant purr for me.'}
+                  ? 'The weight of the world waits on your paw—choose your path, my Queen.'
+                  : 'A soft touch from you, a world of warmth for me..'}
               </p>
 
               <div className="mt-10 flex items-center justify-center">
@@ -394,22 +584,24 @@ export const ChaosLandingPage = () => {
                 </button>
               </div>
 
-              <button
-                ref={noButtonRef}
-                type="button"
-                onMouseEnter={jumpNoButton}
-                onClick={jumpNoButton}
-                className={`absolute rounded-full px-6 py-2 text-sm font-bold shadow-md transition ${
-                  isSecondProposal ? 'bg-white text-rose-900' : 'bg-rose-100 text-rose-800'
-                }`}
-                style={{
-                  left: `${noButtonPosition.x}%`,
-                  top: `${noButtonPosition.y}%`,
-                  transform: 'translate(-50%, -50%)',
-                }}
-              >
-                {getNoButtonLabel(angerLevel)}
-              </button>
+              {angerLevel <= 20 && (
+                <button
+                  ref={noButtonRef}
+                  type="button"
+                  onMouseEnter={jumpNoButton}
+                  onClick={jumpNoButton}
+                  className={`absolute rounded-full px-6 py-2 text-sm font-bold shadow-md transition ${
+                    isSecondProposal ? 'bg-white text-rose-900' : 'bg-rose-100 text-rose-800'
+                  }`}
+                  style={{
+                    left: `${noButtonPosition.x}%`,
+                    top: `${noButtonPosition.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  {getNoButtonLabel(angerLevel)}
+                </button>
+              )}
 
               <AnimatePresence>
                 {angerLevel > 0 && (
@@ -485,6 +677,101 @@ export const ChaosLandingPage = () => {
             </motion.div>
           )}
 
+          {stage === 'confirmSure' && (
+            <motion.div
+              key="confirmSure"
+              initial={{ opacity: 0, scale: 0.97, y: 18 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: -18 }}
+              className={`relative w-full rounded-3xl border p-7 shadow-2xl backdrop-blur-sm sm:p-10 ${
+                isSecondProposalStage
+                  ? 'border-red-200/40 bg-black/35 text-rose-50'
+                  : 'border-white/75 bg-white/80 text-foreground'
+              }`}
+            >
+              <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-rose-200/80">
+                Final Purr-Check
+              </p>
+              <h2 className="mt-4 text-center font-heading text-5xl leading-tight sm:text-7xl">
+                Is your heart settled on me, or do I need to keep winning you over?
+              </h2>
+              <p className="mt-3 text-center text-sm sm:text-base text-rose-100/85">
+                This is your last soft pause before forever.
+              </p>
+
+              <div className="mt-10 flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={handleYesClick}
+                  className="rounded-full bg-gradient-to-r from-rose-400 via-red-400 to-orange-300 px-8 py-3 text-lg font-bold text-red-950 shadow-lg transition hover:opacity-95"
+                >
+                  Yes, 100%
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {stage === 'confirmTerms' && (
+            <motion.div
+              key="confirmTerms"
+              initial={{ opacity: 0, scale: 0.97, y: 18 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: -18 }}
+              className={`relative w-full rounded-3xl border p-7 shadow-2xl backdrop-blur-sm sm:p-10 ${
+                isSecondProposalStage
+                  ? 'border-red-200/40 bg-black/35 text-rose-50'
+                  : 'border-white/75 bg-white/80 text-foreground'
+              }`}
+            >
+              <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-rose-200/80">
+                Before Signing Up
+              </p>
+              <h2 className="mt-4 text-center font-heading text-4xl leading-tight sm:text-6xl">
+                Read the terms and conditions before signing up.
+              </h2>
+              <p className="mt-3 text-center text-sm sm:text-base text-rose-100/85">
+                Open the PDF below, then confirm you agree.
+              </p>
+
+              <div className="mt-6 flex items-center justify-center">
+                <a
+                  href={protocolPdf}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setHasOpenedTerms(true)}
+                  className="rounded-full border border-rose-200/60 bg-rose-100/10 px-6 py-2 text-sm font-bold text-rose-100 shadow-md transition hover:bg-rose-100/20"
+                >
+                  Open Terms (PDF)
+                </a>
+              </div>
+
+              <label className="mt-6 flex items-center justify-center gap-3 text-sm font-semibold text-rose-100/90">
+                <input
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-rose-200/60 text-rose-500 focus:ring-rose-300/60"
+                  checked={hasAgreedTerms}
+                  onChange={(event) => setHasAgreedTerms(event.target.checked)}
+                />
+                Yes, I agree Terms and Condition
+              </label>
+
+              <div className="mt-6 flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={handleYesClick}
+                  disabled={!canConfirmTerms}
+                  className={`rounded-full px-8 py-3 text-lg font-bold shadow-lg transition ${
+                    canConfirmTerms
+                      ? 'bg-gradient-to-r from-rose-400 via-red-400 to-orange-300 text-red-950 hover:opacity-95'
+                      : 'cursor-not-allowed bg-rose-200/30 text-rose-100/70'
+                  }`}
+                >
+                  Yes, I Agree
+                </button>
+              </div>
+            </motion.div>
+          )}
+
           {stage === 'fakeout' && (
             <motion.div
               key="fakeout"
@@ -516,11 +803,20 @@ export const ChaosLandingPage = () => {
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Fake-Out Complete</p>
                   <h2 className="mt-2 font-heading text-4xl text-foreground sm:text-5xl">
-                    I know it&apos;s tooooo soon, just testing you! You&apos;ve already become my wife meow. ❤️
+                   I know it’s barely a heartbeat in time, but my heart has already claimed its forever home—you are my wife and my world, meow and always ❤️
                   </h2>
                   <p className="mt-4 text-sm font-semibold text-foreground/75">
-                    Jumping to the main website and quiz now...
+                    Jumping to the main website...
                   </p>
+                  <div className="mt-6 flex">
+                    <button
+                      type="button"
+                      onClick={handleGoHome}
+                      className="rounded-full bg-gradient-to-r from-pink-300 via-rose-300 to-orange-200 px-6 py-2 text-sm font-bold text-foreground shadow-lg transition hover:opacity-95"
+                    >
+                      Next Page
+                    </button>
+                  </div>
                 </div>
               </div>
             </motion.div>
