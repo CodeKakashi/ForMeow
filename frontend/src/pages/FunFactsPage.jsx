@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const positions = [
   {
@@ -467,6 +467,7 @@ export const FunFactsPage = () => {
   const [hoveredName, setHoveredName] = useState(null);
   const [favoriteMap, setFavoriteMap] = useState({});
   const [pulseName, setPulseName] = useState(null);
+  const [randomPick, setRandomPick] = useState(null);
 
   const tags = useMemo(() => {
     const tagSet = new Set();
@@ -488,6 +489,12 @@ export const FunFactsPage = () => {
     }
     return positions.filter((item) => item.tags.includes(activeTag));
   }, [activeTag]);
+
+  useEffect(() => {
+    if (randomPick && !filteredPositions.some((item) => item.name === randomPick.name)) {
+      setRandomPick(null);
+    }
+  }, [filteredPositions, randomPick]);
 
   const rainLines = useMemo(
     () =>
@@ -522,6 +529,15 @@ export const FunFactsPage = () => {
     const query = `What is ${name} Sex position`;
     const url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(query)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleRandomPick = () => {
+    if (!filteredPositions.length) {
+      setRandomPick(null);
+      return;
+    }
+    const randomIndex = Math.floor(Math.random() * filteredPositions.length);
+    setRandomPick(filteredPositions[randomIndex]);
   };
 
   if (!isUnlocked) {
@@ -624,24 +640,10 @@ export const FunFactsPage = () => {
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10">
         <header className="text-center">
-          <p className="text-xs uppercase tracking-[0.5em] text-rose-200/70">Our Sanctuary</p>
-          <h1 className="sanctuary-title mt-4 text-4xl sm:text-5xl lg:text-6xl">Our Sanctuary</h1>
+          <h2 className="text-xs uppercase tracking-[0.5em] text-rose-200/70">Our Sanctuary</h2>
           <p className="sanctuary-body mt-4 text-base text-white/70 sm:text-lg">
             A refined, intimate library of positions. Filter by heat level and explore at your pace.
           </p>
-          <button
-            type="button"
-            onClick={() =>
-              window.open(
-                'https://www.google.com/search?q=What+is+Missionary+Sex+position',
-                '_blank',
-                'noopener,noreferrer',
-              )
-            }
-            className="mt-6 rounded-full border border-rose-200/50 bg-rose-200/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-rose-100 transition hover:bg-rose-200/20"
-          >
-            View More
-          </button>
         </header>
 
         <nav className="flex flex-wrap items-center justify-center gap-3">
@@ -660,6 +662,91 @@ export const FunFactsPage = () => {
             </button>
           ))}
         </nav>
+
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center shadow-2xl backdrop-blur-xl">
+          <p className="text-xs uppercase tracking-[0.5em] text-rose-200/70">Random Picker</p>
+          <h2 className="sanctuary-title mt-3 text-3xl">Let fate choose</h2>
+          <p className="sanctuary-body mt-2 text-sm text-white/70">
+            Pull a single card from the {activeTag === 'All' ? 'full deck' : `${activeTag} deck`}.
+          </p>
+          <button
+            type="button"
+            onClick={handleRandomPick}
+            className="mt-5 rounded-full border border-rose-200/50 bg-rose-200/10 px-6 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-rose-100 transition hover:bg-rose-200/20"
+          >
+            Pick One
+          </button>
+
+          <AnimatePresence mode="wait">
+            {randomPick ? (
+              <motion.div
+                key={randomPick.name}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 12 }}
+                transition={{ duration: 0.25 }}
+                className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-5 text-left"
+              >
+                <div className="relative mb-4 h-40 overflow-hidden rounded-2xl border border-white/10">
+                  <img
+                    src={artMap.get(randomPick.name)}
+                    alt={`${randomPick.name} visual`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="sanctuary-title text-2xl text-white">{randomPick.name}</h3>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {randomPick.tags.map((tag) => (
+                        <span
+                          key={`${randomPick.name}-${tag}`}
+                          className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white/70"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <motion.button
+                    type="button"
+                    onClick={() => toggleFavorite(randomPick.name)}
+                    animate={pulseName === randomPick.name ? { scale: [1, 1.35, 1] } : { scale: 1 }}
+                    transition={{ duration: 0.4 }}
+                    className="rounded-full border border-white/20 bg-white/10 p-2 text-white/70 transition hover:text-rose-200"
+                  >
+                    <Heart
+                      className={`h-5 w-5 ${
+                        favoriteMap[randomPick.name] ? 'fill-rose-200 text-rose-200' : ''
+                      }`}
+                    />
+                  </motion.button>
+                </div>
+                <p className="sanctuary-body mt-4 text-sm leading-relaxed text-white/75">{randomPick.about}</p>
+                <button
+                  type="button"
+                  onClick={() => handleViewMore(randomPick.name)}
+                  className="mt-4 rounded-full border border-rose-200/40 bg-rose-200/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-rose-100 transition hover:bg-rose-200/20"
+                >
+                  View More
+                </button>
+              </motion.div>
+            ) : (
+              <motion.p
+                key="placeholder"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="sanctuary-body mt-5 text-xs uppercase tracking-[0.25em] text-white/40"
+              >
+                No card picked yet
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </section>
 
         <motion.div
           layout

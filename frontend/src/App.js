@@ -18,7 +18,7 @@ import { Toaster } from '@/components/ui/sonner';
 const AppShell = () => {
   const location = useLocation();
   const isChaosLanding = location.pathname === '/';
-  const isLocked = false;
+  const isLocked = true;
   const clickAudioRef = useRef(null);
   const lastClickAtRef = useRef(0);
 
@@ -93,7 +93,7 @@ const AppShell = () => {
             <div className="w-full max-w-2xl rounded-3xl border border-white/75 bg-white/85 p-8 text-center shadow-2xl backdrop-blur-sm sm:p-10">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Come Back Soon</p>
               <h2 className="mt-4 font-heading text-3xl leading-tight text-foreground sm:text-5xl">
-                Baby you should Come back on Feb 15 for more suprise
+                Baby you should Come back on soon for more suprise
               </h2>
               <p className="mt-4 text-sm font-medium text-foreground/70">
                 The rest stays hidden until then.
