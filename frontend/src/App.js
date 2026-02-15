@@ -18,7 +18,7 @@ import { Toaster } from '@/components/ui/sonner';
 const AppShell = () => {
   const location = useLocation();
   const isChaosLanding = location.pathname === '/';
-  const isLocked = !isChaosLanding;
+  const isLocked = false;
   const clickAudioRef = useRef(null);
   const lastClickAtRef = useRef(0);
 

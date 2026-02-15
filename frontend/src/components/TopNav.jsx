@@ -58,7 +58,7 @@ export const TopNav = () => {
               `${linkBase} ${isActive ? linkActive : linkInactive}`
             }
           >
-            Fun Facts
+            Our Sanctuary
           </NavLink>
           <NavLink
             to="/coupon-vault"

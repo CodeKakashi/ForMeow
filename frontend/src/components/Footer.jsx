@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import { ConfettiButton } from './ConfettiButton';
+import catPurring from '../assets/cat_puring.mp3';
 
 const MEOW_SIC_TRACK = '/audio/meow-lofi.mp3';
 
@@ -29,10 +30,12 @@ export const Footer = () => {
   const [petHearts, setPetHearts] = useState([]);
   const [romanticEmergency, setRomanticEmergency] = useState(false);
   const [audioError, setAudioError] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const petZoneRef = useRef(null);
   const heartSpawnRef = useRef(0);
   const heartTimersRef = useRef([]);
   const emergencyAudioRef = useRef(null);
+  const purrAudioRef = useRef(null);
 
   const spawnHeart = useCallback((xPercent, yPercent) => {
     const id = `${Date.now()}-${Math.random()}`;
@@ -48,11 +51,15 @@ export const Footer = () => {
   useEffect(() => {
     const activeTimers = heartTimersRef.current;
     const emergencyAudio = emergencyAudioRef.current;
+    const purrAudio = purrAudioRef.current;
 
     return () => {
       activeTimers.forEach((timerId) => window.clearTimeout(timerId));
       if (emergencyAudio) {
         emergencyAudio.pause();
+      }
+      if (purrAudio) {
+        purrAudio.pause();
       }
     };
   }, []);
@@ -81,6 +88,29 @@ export const Footer = () => {
     spawnHeart(Math.max(8, Math.min(92, xPercent)), Math.max(12, Math.min(88, yPercent)));
   };
 
+  const startPurr = async () => {
+    if (!purrAudioRef.current) {
+      return;
+    }
+    setHasInteracted(true);
+
+    try {
+      purrAudioRef.current.currentTime = 0;
+      await purrAudioRef.current.play();
+      setAudioError(false);
+    } catch (error) {
+      setAudioError(true);
+    }
+  };
+
+  const stopPurr = () => {
+    if (!purrAudioRef.current) {
+      return;
+    }
+    purrAudioRef.current.pause();
+    purrAudioRef.current.currentTime = 0;
+  };
+
   const toggleRomanticEmergency = async () => {
     if (!emergencyAudioRef.current) {
       return;
@@ -107,6 +137,7 @@ export const Footer = () => {
   return (
     <footer className="relative overflow-hidden px-4 py-10 sm:py-12">
       <audio ref={emergencyAudioRef} loop preload="none" src={MEOW_SIC_TRACK} onError={() => setAudioError(true)} />
+      <audio ref={purrAudioRef} loop preload="none" src={catPurring} onError={() => setAudioError(true)} />
 
       <div className="absolute inset-0 bg-gradient-to-t from-secondary/50 via-accent/30 to-transparent" />
 
@@ -149,15 +180,35 @@ export const Footer = () => {
             <div
               ref={petZoneRef}
               className="relative mt-4 overflow-hidden rounded-2xl border border-rose-200 bg-gradient-to-r from-rose-100 to-orange-100 p-5"
-              onMouseEnter={() => setIsPetting(true)}
-              onMouseLeave={() => setIsPetting(false)}
-              onMouseMove={handlePetStroke}
-              onTouchStart={(event) => {
+              onMouseEnter={() => {
                 setIsPetting(true);
+                startPurr();
+              }}
+              onMouseLeave={() => {
+                setIsPetting(false);
+                stopPurr();
+              }}
+              onMouseMove={(event) => {
+                if (!hasInteracted) {
+                  startPurr();
+                }
                 handlePetStroke(event);
               }}
-              onTouchMove={handlePetStroke}
-              onTouchEnd={() => setIsPetting(false)}
+              onTouchStart={(event) => {
+                setIsPetting(true);
+                startPurr();
+                handlePetStroke(event);
+              }}
+              onTouchMove={(event) => {
+                if (!hasInteracted) {
+                  startPurr();
+                }
+                handlePetStroke(event);
+              }}
+              onTouchEnd={() => {
+                setIsPetting(false);
+                stopPurr();
+              }}
             >
               <motion.div className="mx-auto w-fit text-7xl" animate={{ y: [0, -4, 0] }} transition={{ duration: 1.9, repeat: Infinity }}>
                 {isPetting ? '😻' : '😽'}

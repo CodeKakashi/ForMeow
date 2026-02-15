@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import myWomen from '../assets/myWomen.jpeg';
+
 
 const sparkleTraits = [
   {
@@ -48,7 +51,174 @@ const memoryMoments = [
   },
 ];
 
+const moodChips = [
+  { label: 'Kind', tone: 'soft' },
+  { label: 'Brilliant', tone: 'bright' },
+  { label: 'Playful', tone: 'playful' },
+  { label: 'Caring', tone: 'caring' },
+  { label: 'Mischievous', tone: 'mischievous' },
+  { label: 'Adorable', tone: 'sweet' },
+  { label: 'Gentle', tone: 'gentle' },
+  { label: 'Horny', tone: 'bold' },
+  { label: 'Sexy', tone: 'sensual' },
+];
+
+const moreMoodChips = [
+  { label: 'Deep', tone: 'profound' },
+  { label: 'Dreamy', tone: 'ethereal' },
+  { label: 'Fated', tone: 'destined' },
+  { label: 'Loyal', tone: 'steady' },
+  { label: 'Magnetic', tone: 'attractive' },
+  { label: 'Protective', tone: 'strong' },
+  { label: 'Vulnerable', tone: 'raw' },
+  { label: 'Devoted', tone: 'loyal' },
+  { label: 'Peaceful', tone: 'calm' },
+  { label: 'Healed', tone: 'restored' },
+  { label: 'Primal', tone: 'wild' },
+  { label: 'Electric', tone: 'charged' },
+  { label: 'Seductive', tone: 'alluring' },
+  { label: 'Hungry', tone: 'craving' },
+  { label: 'Tantalizing', tone: 'teasing' },
+  { label: 'Intoxicating', tone: 'addictive' },
+  { label: 'Breathless', tone: 'intense' },
+  { label: 'Steamy', tone: 'hot' },
+  { label: 'Uninhibited', tone: 'free' },
+  { label: 'Addictive', tone: 'obsessive' },
+  { label: 'Honest', tone: 'sincere' },
+  { label: 'Tender', tone: 'soft' },
+  { label: 'Wistful', tone: 'longing' },
+  { label: 'Wild', tone: 'untamed' },
+  { label: 'Sparky', tone: 'energetic' },
+  { label: 'Daring', tone: 'bold' },
+  { label: 'Radiant', tone: 'glowing' },
+  { label: 'Affectionate', tone: 'warm' },
+  { label: 'Enchanting', tone: 'magical' },
+  { label: 'Desirous', tone: 'passionate' },
+  { label: 'Slick', tone: 'wet' },
+  { label: 'Thirsty', tone: 'craving' },
+  { label: 'Heat', tone: 'burning' },
+  { label: 'Surrendered', tone: 'yielding' },
+  { label: 'Obsessed', tone: 'fixated' },
+  { label: 'Tangled', tone: 'intertwined' },
+  { label: 'Feverish', tone: 'intense' },
+  { label: 'Flush', tone: 'blushing' },
+  { label: 'Velvet', tone: 'smooth' },
+  { label: 'Dominant', tone: 'commanding' },
+  { label: 'Submissive', tone: 'trusting' },
+  { label: 'Euphoric', tone: 'high' },
+  { label: 'Skin-to-Skin', tone: 'bare' },
+  { label: 'Rhythmic', tone: 'flowing' },
+  { label: 'Soul-Bound', tone: 'eternal' },
+  { label: 'Recognized', tone: 'familiar' },
+  { label: 'Home', tone: 'belonging' },
+  { label: 'Awakened', tone: 'new' },
+  { label: 'Ethereal', tone: 'otherworldly' },
+  { label: 'Sanctuary', tone: 'safe' },
+  { label: 'Anchored', tone: 'grounded' },
+  { label: 'Synchronized', tone: 'aligned' },
+  { label: 'Infinite', tone: 'endless' },
+  { label: 'Cherished', tone: 'valued' },
+  { label: 'Teasing', tone: 'frisky' },
+  { label: 'Flirty', tone: 'charming' },
+  { label: 'Bratty', tone: 'feisty' },
+  { label: 'Captivated', tone: 'hooked' },
+  { label: 'Fearless', tone: 'brave' },
+  { label: 'Electric', tone: 'vibrant' },
+  { label: 'Impulsive', tone: 'spontaneous' },
+  { label: 'Irresistible', tone: 'magnetic' },
+  { label: 'Unfiltered', tone: 'honest' },
+  { label: 'Aching', tone: 'longing' },
+  { label: 'Trembling', tone: 'shaky' },
+  { label: 'Haunting', tone: 'lingering' },
+  { label: 'Quiet', tone: 'introspective' },
+  { label: 'Recovering', tone: 'healing' },
+  { label: 'Stubborn', tone: 'persistent' },
+  { label: 'Whole', tone: 'complete' },
+];
+
+const moodChipStyles = {
+  soft: 'border-white/60 bg-white/70 text-foreground shadow-[0_10px_18px_rgba(15,23,42,0.08)]',
+  bright: 'border-amber-200/80 bg-amber-100/80 text-amber-900 shadow-[0_10px_18px_rgba(245,158,11,0.18)]',
+  playful: 'border-pink-200/80 bg-pink-100/80 text-pink-900 shadow-[0_10px_18px_rgba(236,72,153,0.2)]',
+  caring: 'border-emerald-200/80 bg-emerald-100/80 text-emerald-900 shadow-[0_10px_18px_rgba(16,185,129,0.18)]',
+  mischievous: 'border-violet-200/80 bg-violet-100/80 text-violet-900 shadow-[0_10px_18px_rgba(139,92,246,0.2)]',
+  sweet: 'border-rose-200/80 bg-rose-100/80 text-rose-900 shadow-[0_10px_18px_rgba(244,63,94,0.18)]',
+  gentle: 'border-sky-200/80 bg-sky-100/80 text-sky-900 shadow-[0_10px_18px_rgba(56,189,248,0.18)]',
+  bold: 'border-fuchsia-200/80 bg-fuchsia-100/80 text-fuchsia-900 shadow-[0_10px_18px_rgba(217,70,239,0.22)]',
+  sensual: 'border-red-200/80 bg-red-100/80 text-red-900 shadow-[0_10px_18px_rgba(248,113,113,0.2)]',
+  profound: 'border-slate-200/80 bg-slate-100/80 text-slate-900 shadow-[0_10px_18px_rgba(30,41,59,0.18)]',
+  ethereal: 'border-indigo-200/80 bg-indigo-100/80 text-indigo-900 shadow-[0_10px_18px_rgba(99,102,241,0.2)]',
+  destined: 'border-amber-200/80 bg-amber-50/90 text-amber-900 shadow-[0_10px_18px_rgba(251,191,36,0.18)]',
+  steady: 'border-teal-200/80 bg-teal-100/80 text-teal-900 shadow-[0_10px_18px_rgba(20,184,166,0.18)]',
+  attractive: 'border-pink-200/80 bg-pink-100/80 text-pink-900 shadow-[0_10px_18px_rgba(244,114,182,0.2)]',
+  strong: 'border-blue-200/80 bg-blue-100/80 text-blue-900 shadow-[0_10px_18px_rgba(59,130,246,0.2)]',
+  raw: 'border-stone-200/80 bg-stone-100/80 text-stone-900 shadow-[0_10px_18px_rgba(120,113,108,0.18)]',
+  loyal: 'border-cyan-200/80 bg-cyan-100/80 text-cyan-900 shadow-[0_10px_18px_rgba(34,211,238,0.18)]',
+  calm: 'border-sky-200/80 bg-sky-50/90 text-sky-900 shadow-[0_10px_18px_rgba(125,211,252,0.18)]',
+  restored: 'border-emerald-200/80 bg-emerald-50/90 text-emerald-900 shadow-[0_10px_18px_rgba(52,211,153,0.18)]',
+  wild: 'border-orange-200/80 bg-orange-100/80 text-orange-900 shadow-[0_10px_18px_rgba(249,115,22,0.2)]',
+  charged: 'border-yellow-200/80 bg-yellow-100/80 text-yellow-900 shadow-[0_10px_18px_rgba(250,204,21,0.2)]',
+  alluring: 'border-rose-200/80 bg-rose-100/80 text-rose-900 shadow-[0_10px_18px_rgba(251,113,133,0.2)]',
+  craving: 'border-red-200/80 bg-red-100/80 text-red-900 shadow-[0_10px_18px_rgba(248,113,113,0.2)]',
+  teasing: 'border-fuchsia-200/80 bg-fuchsia-100/80 text-fuchsia-900 shadow-[0_10px_18px_rgba(232,121,249,0.2)]',
+  addictive: 'border-violet-200/80 bg-violet-100/80 text-violet-900 shadow-[0_10px_18px_rgba(167,139,250,0.2)]',
+  intense: 'border-rose-200/80 bg-rose-200/70 text-rose-950 shadow-[0_10px_18px_rgba(244,63,94,0.25)]',
+  hot: 'border-orange-200/80 bg-orange-200/70 text-orange-950 shadow-[0_10px_18px_rgba(251,146,60,0.25)]',
+  free: 'border-lime-200/80 bg-lime-100/80 text-lime-900 shadow-[0_10px_18px_rgba(163,230,53,0.2)]',
+  obsessive: 'border-purple-200/80 bg-purple-100/80 text-purple-900 shadow-[0_10px_18px_rgba(196,181,253,0.22)]',
+  sincere: 'border-neutral-200/80 bg-neutral-100/80 text-neutral-900 shadow-[0_10px_18px_rgba(115,115,115,0.18)]',
+  longing: 'border-indigo-200/80 bg-indigo-50/90 text-indigo-900 shadow-[0_10px_18px_rgba(129,140,248,0.2)]',
+  untamed: 'border-amber-200/80 bg-amber-100/80 text-amber-900 shadow-[0_10px_18px_rgba(251,191,36,0.2)]',
+  energetic: 'border-rose-200/80 bg-rose-100/80 text-rose-900 shadow-[0_10px_18px_rgba(251,113,133,0.2)]',
+  glowing: 'border-yellow-200/80 bg-yellow-50/90 text-yellow-900 shadow-[0_10px_18px_rgba(253,224,71,0.2)]',
+  warm: 'border-amber-200/80 bg-amber-100/80 text-amber-900 shadow-[0_10px_18px_rgba(251,191,36,0.2)]',
+  magical: 'border-indigo-200/80 bg-indigo-100/80 text-indigo-900 shadow-[0_10px_18px_rgba(165,180,252,0.2)]',
+  passionate: 'border-red-200/80 bg-red-200/70 text-red-950 shadow-[0_10px_18px_rgba(239,68,68,0.25)]',
+  wet: 'border-cyan-200/80 bg-cyan-100/80 text-cyan-900 shadow-[0_10px_18px_rgba(56,189,248,0.2)]',
+  burning: 'border-orange-300/80 bg-orange-200/80 text-orange-950 shadow-[0_10px_18px_rgba(249,115,22,0.28)]',
+  yielding: 'border-rose-200/80 bg-rose-100/80 text-rose-900 shadow-[0_10px_18px_rgba(244,114,182,0.2)]',
+  fixated: 'border-purple-200/80 bg-purple-200/70 text-purple-950 shadow-[0_10px_18px_rgba(126,34,206,0.22)]',
+  intertwined: 'border-teal-200/80 bg-teal-100/80 text-teal-900 shadow-[0_10px_18px_rgba(13,148,136,0.2)]',
+  blushing: 'border-pink-200/80 bg-pink-100/80 text-pink-900 shadow-[0_10px_18px_rgba(236,72,153,0.2)]',
+  smooth: 'border-slate-200/80 bg-slate-100/80 text-slate-900 shadow-[0_10px_18px_rgba(71,85,105,0.18)]',
+  commanding: 'border-red-200/80 bg-red-200/70 text-red-950 shadow-[0_10px_18px_rgba(220,38,38,0.28)]',
+  trusting: 'border-sky-200/80 bg-sky-100/80 text-sky-900 shadow-[0_10px_18px_rgba(56,189,248,0.2)]',
+  high: 'border-fuchsia-200/80 bg-fuchsia-100/80 text-fuchsia-900 shadow-[0_10px_18px_rgba(192,132,252,0.24)]',
+  bare: 'border-stone-200/80 bg-stone-100/80 text-stone-900 shadow-[0_10px_18px_rgba(120,113,108,0.2)]',
+  flowing: 'border-emerald-200/80 bg-emerald-100/80 text-emerald-900 shadow-[0_10px_18px_rgba(16,185,129,0.2)]',
+  eternal: 'border-indigo-200/80 bg-indigo-100/80 text-indigo-900 shadow-[0_10px_18px_rgba(129,140,248,0.2)]',
+  familiar: 'border-amber-200/80 bg-amber-100/80 text-amber-900 shadow-[0_10px_18px_rgba(251,191,36,0.2)]',
+  belonging: 'border-rose-200/80 bg-rose-100/80 text-rose-900 shadow-[0_10px_18px_rgba(251,113,133,0.2)]',
+  new: 'border-lime-200/80 bg-lime-100/80 text-lime-900 shadow-[0_10px_18px_rgba(163,230,53,0.2)]',
+  otherworldly: 'border-violet-200/80 bg-violet-100/80 text-violet-900 shadow-[0_10px_18px_rgba(167,139,250,0.22)]',
+  safe: 'border-emerald-200/80 bg-emerald-50/90 text-emerald-900 shadow-[0_10px_18px_rgba(52,211,153,0.2)]',
+  grounded: 'border-stone-200/80 bg-stone-100/80 text-stone-900 shadow-[0_10px_18px_rgba(120,113,108,0.2)]',
+  aligned: 'border-cyan-200/80 bg-cyan-100/80 text-cyan-900 shadow-[0_10px_18px_rgba(34,211,238,0.2)]',
+  endless: 'border-slate-200/80 bg-slate-100/80 text-slate-900 shadow-[0_10px_18px_rgba(71,85,105,0.18)]',
+  valued: 'border-pink-200/80 bg-pink-100/80 text-pink-900 shadow-[0_10px_18px_rgba(244,114,182,0.2)]',
+  frisky: 'border-amber-200/80 bg-amber-100/80 text-amber-900 shadow-[0_10px_18px_rgba(251,191,36,0.2)]',
+  charming: 'border-rose-200/80 bg-rose-100/80 text-rose-900 shadow-[0_10px_18px_rgba(251,113,133,0.2)]',
+  feisty: 'border-orange-200/80 bg-orange-100/80 text-orange-900 shadow-[0_10px_18px_rgba(249,115,22,0.2)]',
+  hooked: 'border-violet-200/80 bg-violet-100/80 text-violet-900 shadow-[0_10px_18px_rgba(167,139,250,0.22)]',
+  brave: 'border-blue-200/80 bg-blue-100/80 text-blue-900 shadow-[0_10px_18px_rgba(59,130,246,0.2)]',
+  vibrant: 'border-yellow-200/80 bg-yellow-100/80 text-yellow-900 shadow-[0_10px_18px_rgba(253,224,71,0.2)]',
+  spontaneous: 'border-fuchsia-200/80 bg-fuchsia-100/80 text-fuchsia-900 shadow-[0_10px_18px_rgba(192,132,252,0.24)]',
+  magnetic: 'border-pink-200/80 bg-pink-100/80 text-pink-900 shadow-[0_10px_18px_rgba(244,114,182,0.2)]',
+  honest: 'border-neutral-200/80 bg-neutral-100/80 text-neutral-900 shadow-[0_10px_18px_rgba(115,115,115,0.2)]',
+  shaky: 'border-blue-200/80 bg-blue-100/80 text-blue-900 shadow-[0_10px_18px_rgba(96,165,250,0.2)]',
+  lingering: 'border-violet-200/80 bg-violet-100/80 text-violet-900 shadow-[0_10px_18px_rgba(167,139,250,0.22)]',
+  introspective: 'border-slate-200/80 bg-slate-100/80 text-slate-900 shadow-[0_10px_18px_rgba(71,85,105,0.2)]',
+  healing: 'border-emerald-200/80 bg-emerald-100/80 text-emerald-900 shadow-[0_10px_18px_rgba(16,185,129,0.2)]',
+  persistent: 'border-amber-200/80 bg-amber-100/80 text-amber-900 shadow-[0_10px_18px_rgba(251,191,36,0.2)]',
+  complete: 'border-slate-200/80 bg-slate-100/80 text-slate-900 shadow-[0_10px_18px_rgba(71,85,105,0.2)]',
+};
+
 export const AboutHerPage = () => {
+  const [visibleMoodCount, setVisibleMoodCount] = useState(4);
+  const allMoodChips = [...moodChips, ...moreMoodChips];
+  const visibleMoodChips = allMoodChips.slice(0, visibleMoodCount);
+  const hasMoreMoods = visibleMoodCount < allMoodChips.length;
+
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -91,19 +261,27 @@ export const AboutHerPage = () => {
                 The Heart of My World
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground">
-                She is warmth, wonder, and the kind of love that makes everything feel brighter. This
-                page is a little constellation of the things that make her so special.
+                She is the warmth in my day and the wonder in my nights. This page is my own little constellation—a collection of all the beautiful things that make her exactly who she is
               </p>
               <div className="flex flex-wrap gap-3">
-                {['Kind', 'Brilliant', 'Playful', 'Caring', 'Mischievous', 'Adorable', 'Gentle', 'Horny', 'Sexy'].map((chip) => (
+                {visibleMoodChips.map((chip) => (
                   <span
-                    key={chip}
-                    className="rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-foreground shadow-sm"
+                    key={chip.label}
+                    className={`rounded-full border px-4 py-2 text-sm font-semibold transition hover:-translate-y-0.5 hover:shadow-lg ${moodChipStyles[chip.tone]}`}
                   >
-                    {chip}
+                    {chip.label}
                   </span>
                 ))}
               </div>
+              {hasMoreMoods && (
+                <button
+                  type="button"
+                  onClick={() => setVisibleMoodCount((count) => Math.min(count + 4, allMoodChips.length))}
+                  className="mt-4 rounded-full border border-white/60 bg-white/70 px-5 py-2 text-sm font-semibold text-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                  Show More Moods
+                </button>
+              )}
             </motion.div>
 
             <motion.div
@@ -116,18 +294,17 @@ export const AboutHerPage = () => {
               <div className="glass-effect rounded-3xl p-6 shadow-xl">
                 <div className="relative overflow-hidden rounded-2xl">
                   <img
-                    src="https://source.unsplash.com/700x900/?roses,romantic"
+                    src={myWomen}
                     alt="A soft romantic bouquet"
                     className="h-80 w-full object-cover sm:h-[28rem]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/70 px-4 py-3 text-sm font-semibold text-foreground">
-                    A little space for her favorite photo.
+                    A little space for my favorite photo.
                   </div>
                 </div>
                 <div className="mt-5 space-y-2 text-sm text-muted-foreground">
-                  <p>Her smile feels like sunshine.</p>
-                  <p>Her presence feels like home.</p>
+                  <p>My Women with small teeth and big Heart.</p>
                 </div>
               </div>
             </motion.div>
