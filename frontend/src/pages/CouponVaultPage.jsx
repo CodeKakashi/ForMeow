@@ -4,53 +4,53 @@ import { Download, Sparkles } from 'lucide-react';
 
 const SCRATCH_CARD_WIDTH = 340;
 const SCRATCH_CARD_HEIGHT = 196;
-const SCRATCH_DOWNLOAD_THRESHOLD = 40;
+const SCRATCH_DOWNLOAD_THRESHOLD = 10;
 const COUPON_SEAL_TEXT = 'Official Love Seal';
-const COUPON_SIGNER = 'Haarish';
+const COUPON_SIGNER = 'Mr. Meow';
 const PAW_CURSOR =
   'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2732%27 height=%2732%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2719%27 r=%277.5%27 fill=%27%23f472b6%27/%3E%3Ccircle cx=%279%27 cy=%2711%27 r=%273.5%27 fill=%27%23fb7185%27/%3E%3Ccircle cx=%2716%27 cy=%278.5%27 r=%273.7%27 fill=%27%23fb7185%27/%3E%3Ccircle cx=%2723%27 cy=%2711%27 r=%273.5%27 fill=%27%23fb7185%27/%3E%3Ccircle cx=%2727%27 cy=%2717%27 r=%273.2%27 fill=%27%23fb7185%27/%3E%3C/svg%3E") 14 14, pointer';
 
 const couponChallenges = [
   {
     id: 'coupon-1',
-    prize: 'One 30-minute back scratch pass',
-    question: 'Type the pet name: "meowiski"',
-    answers: ['meowiski'],
+    prize: 'One 30-minute back massage pass',
+    question: 'How do I like to call you when we first met?',
+    answers: ['Moni',"moni","Tharkuri","tharkuri"],
     password: 'PAW-01',
   },
   {
     id: 'coupon-2',
-    prize: 'Dinner of your choice (no debates)',
-    question: 'Valentine month number?',
-    answers: ['2', '02', 'feb', 'february'],
+    prize: 'Sex marathon with full control (you set the rules) of 60 minutes',
+    question: 'Who is my favorite anime character? (hint: One of my usernames is inspired by them)',
+    answers: ['Kakashi', 'Kakashi Hatake', 'kakashi', 'Itachi', 'Itachi Uchiha', 'itachi'],
     password: 'PAW-02',
   },
   {
     id: 'coupon-3',
     prize: 'Movie night with full cuddle control',
-    question: 'Complete this: "Forever ____"',
-    answers: ['yours'],
+    question: 'What is the name of my favorite hindi song? (hint: We watched this movie together)',
+    answers: ['Sajni', 'Sajni Ji', 'sajni', 'sajni ji'],
     password: 'PAW-03',
   },
   {
     id: 'coupon-4',
-    prize: 'Breakfast in bed + forehead kisses',
-    question: 'Which animal theme is this site built around?',
-    answers: ['cat', 'cats'],
+    prize: 'One long day of pampering whenever you want',
+    question: 'What is favorite thing about you ?',
+    answers: ['eye', 'heart', 'smile', 'lips', 'voice', 'presence', 'everything', 'boob','pussy', 'tits', 'teeth', 'hair', 'ear'],
     password: 'PAW-04',
   },
   {
     id: 'coupon-5',
-    prize: 'No-hissing peace dinner date',
-    question: 'Type this exactly: "purr"',
-    answers: ['purr'],
+    prize: 'One Date outside where you get to choose the activity',
+    question: 'One thing I hate about you?',
+    answers: ['annoyed face', 'Annoyed Face', 'attitude', 'careless', 'no attention to me'],
     password: 'PAW-05',
   },
   {
     id: 'coupon-6',
-    prize: 'One extra cuddle marathon ticket',
-    question: 'What comes after "meow"? (hint: "meow ____")',
-    answers: ['meow', 'again', 'more'],
+    prize: 'One night of full control over me',
+    question: 'which is favorite sex position?',
+    answers: ['69', 'snail', 'cow girl'],
     password: 'PAW-06',
   },
 ];

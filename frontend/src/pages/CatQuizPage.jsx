@@ -244,14 +244,26 @@ const QUESTION_POOL = [
 const REWARD_TIERS = [
   {
     minPercent: 90,
-    title: 'Supreme Cat-Queen',
+    title: 'Favorite Baby',
     badge: '👑🐱',
     message: 'You know every whisker, every mood, every secret purr.',
     coupons: [
-      'Good for one 30-minute back scratch (redeem anytime)',
-      'Valid for one No-Hissing dinner date with dessert',
-      'Good for one VIP cuddle marathon + movie pick control',
-    ],
+      // STEAMY
+      "Good for one 'Blindfold & Explore' session: You relax, I take full control for 30 minutes.",
+      "Valid for one 'Ice or Heat' sensory play night—dealer's choice on the temperature.",
+
+      // PLAYFUL
+      "Good for one 'Strip Trivia' match: Every wrong answer costs a piece of clothing.",
+      "Valid for one 'Kitchen Counter Quickie'—anytime, regardless of what you want me to cook.",
+
+      // HIGH INTIMACY
+      "Good for one 'Sensual Massage' session: 45 minutes of full body attention.",
+      "Valid for one One bath together night: You run the water, I bring the bubbles, and we stay in until we prune.",
+
+      // ROMANTIC
+      "Good for one 'Slow Dance in the Dark': Just us, one song, and zero space between our bodies.",
+      "Valid for one 'Sunrise Spoons' Morning suprise Fuck"
+    ]
   },
   {
     minPercent: 70,
@@ -259,9 +271,10 @@ const REWARD_TIERS = [
     badge: '✨🐾',
     message: 'Your feline intuition is strong and dangerously adorable.',
     coupons: [
-      'Valid for one breakfast-in-bed with extra kisses',
-      'Good for one custom playlist and slow-dance night',
-      'Redeem one "You were right, babe" golden pass',
+      "Good for one 'Hands-On' morning: Breakfast-in-bed served with a side of wandering hands.",
+      "Valid for one 'Slow Burn' night: A custom playlist, low lights, and a dance that leads nowhere but the bedroom.",
+      "Redeem one 'You Were Right' pass: Admit you won the argument, but I get to choose your 'punishment'.",
+      "Good for one 'Skin-on-Skin' midnight session: No clothes, no phones, just total sensory focus."
     ],
   },
   {
@@ -270,9 +283,9 @@ const REWARD_TIERS = [
     badge: '😺',
     message: 'Solid instincts. A few whiskers still need investigation.',
     coupons: [
-      'Valid for one cozy couch cuddle + blanket burrito',
-      'Good for one goofy photo booth session at home',
-    ],
+      "Valid for one 'Wrestling Match': Whoever pins the other down for 10 seconds gets to make one 'naughty' demand.",
+      "Good for one 'Hands-On' Movie Night: Every time a character kisses on screen, we have to lose an item of clothing."
+    ]
   },
   {
     minPercent: 0,
@@ -281,7 +294,7 @@ const REWARD_TIERS = [
     message: 'You are here for catnip and chaos, and that is still cute.',
     coupons: [
       'Good for one "no judgment" re-quiz rematch',
-      'Valid for one gentle hint session over hot chocolate',
+      "I will say what to do now, but you have to follow it immediately: could be a kiss, a cuddle, or a tickle attack.",
     ],
   },
 ];
@@ -775,7 +788,7 @@ export const CatQuizPage = () => {
               >
                 <div className="rounded-2xl bg-gradient-to-r from-rose-100 via-pink-100 to-orange-100 p-5">
                   <p className="text-base font-semibold text-foreground sm:text-lg">
-                    Welcome to the Ultimate Paws-on Test! Are you a true Cat-Queen who knows her favorite human&apos;s
+                    Welcome to the Ultimate Paws-on Test! Are you a true Baby who knows her favorite human&apos;s
                     every whisker, or are you just here for the catnip? Prove your feline intuition!
                   </p>
                 </div>
@@ -803,22 +816,20 @@ export const CatQuizPage = () => {
                       <button
                         type="button"
                         onClick={() => setMode('normal')}
-                        className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                          mode === 'normal'
-                            ? 'bg-gradient-to-r from-pink-300 to-rose-300 text-foreground shadow-md'
-                            : 'bg-white text-foreground/80'
-                        }`}
+                        className={`rounded-full px-4 py-2 text-sm font-semibold transition ${mode === 'normal'
+                          ? 'bg-gradient-to-r from-pink-300 to-rose-300 text-foreground shadow-md'
+                          : 'bg-white text-foreground/80'
+                          }`}
                       >
                         Classic Purr (Normal)
                       </button>
                       <button
                         type="button"
                         onClick={() => setMode('rapid')}
-                        className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition ${
-                          mode === 'rapid'
-                            ? 'bg-gradient-to-r from-orange-300 to-rose-300 text-foreground shadow-md'
-                            : 'bg-white text-foreground/80'
-                        }`}
+                        className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition ${mode === 'rapid'
+                          ? 'bg-gradient-to-r from-orange-300 to-rose-300 text-foreground shadow-md'
+                          : 'bg-white text-foreground/80'
+                          }`}
                       >
                         <Timer className="h-4 w-4" />
                         Rapid Round (2x Points)
@@ -838,11 +849,10 @@ export const CatQuizPage = () => {
                             key={category.id}
                             type="button"
                             onClick={() => toggleCategory(category.id)}
-                            className={`rounded-2xl border px-3 py-2 text-left transition ${
-                              isActive
-                                ? 'border-pink-300 bg-pink-100 shadow-sm'
-                                : 'border-white/70 bg-white text-foreground/80'
-                            }`}
+                            className={`rounded-2xl border px-3 py-2 text-left transition ${isActive
+                              ? 'border-pink-300 bg-pink-100 shadow-sm'
+                              : 'border-white/70 bg-white text-foreground/80'
+                              }`}
                           >
                             <p className="text-sm font-bold">
                               {category.emoji} {category.id}
