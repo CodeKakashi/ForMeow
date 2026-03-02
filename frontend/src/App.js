@@ -77,10 +77,10 @@ const AppShell = () => {
             <Route path="/" element={<ChaosLandingPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/about-her" element={<AboutHerPage />} />
-            {/* <Route path="/mood-picker" element={<MoodPickerPage />} />
+            {/* <Route path="/mood-picker" element={<MoodPickerPage />} /> */}
             <Route path="/cat-quiz" element={<CatQuizPage />} />
             <Route path="/coupon-vault" element={<CouponVaultPage />} />
-            <Route path="/fun-facts" element={<FunFactsPage />} /> */}
+            <Route path="/fun-facts" element={<FunFactsPage />} />
           </Routes>
 
           {!isChaosLanding && <Footer />}

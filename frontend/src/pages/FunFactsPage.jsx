@@ -517,7 +517,7 @@ export const FunFactsPage = () => {
 
   const handleUnlock = (event) => {
     event.preventDefault();
-    if (password === 'Razia@123') {
+    if (password === 'razia27') {
       setIsUnlocked(true);
       setShowError(false);
     } else {
